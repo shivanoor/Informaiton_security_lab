@@ -21,6 +21,17 @@ public class DigitalSignature {
         sg.update(message.getBytes());
         boolean verified = sg.verify(signedMessage);
         System.out.println("Verification:" + verified);
+        
+        
+        // To show Verification Failed case
+        KeyPairGenerator kg2 = KeyPairGenerator.getInstance("RSA");
+        kg2.initialize(1024);
+        KeyPair kp2 = kg2.genKeyPair();
+        PublicKey pubkey2 = kp2.getPublic();
+        sg.initVerify(pubkey2);
+        sg.update(message.getBytes());
+        boolean verified2 = sg.verify(signedMessage);
+        System.out.println("Verification:" + verified2);
 
     }
 }
